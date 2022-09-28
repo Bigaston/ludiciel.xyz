@@ -1,11 +1,9 @@
 // editable info
 
 const linkSpreedsheet =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLs4ffsO-CWK13TuzdK5HOQeKwYYU7NPYEFm1enBJ3BWyi9-kxy-uJxFhhF1wptAI8xQIIYBHvZn5J/pub?gid=0&single=true&output=csv"; // change this to your own URL
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTeJUjhwSWfk2_QboKMVmxto743dSeCRNvimLmNKXJtOo6-3ecmdwVZdJRLl6ZdoBYYItKLX6HnMoM/pub?output=csv"; // change this to your own URL
 const linkContrib =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLs4ffsO-CWK13TuzdK5HOQeKwYYU7NPYEFm1enBJ3BWyi9-kxy-uJxFhhF1wptAI8xQIIYBHvZn5J/pub?gid=2186560&single=true&output=csv";
-const linkTips =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLs4ffsO-CWK13TuzdK5HOQeKwYYU7NPYEFm1enBJ3BWyi9-kxy-uJxFhhF1wptAI8xQIIYBHvZn5J/pub?gid=1657545455&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTeJUjhwSWfk2_QboKMVmxto743dSeCRNvimLmNKXJtOo6-3ecmdwVZdJRLl6ZdoBYYItKLX6HnMoM/pub?gid=2186560&single=true&output=csv";
 
 const categoryStartNum = 3; // let the program know where the categoy begins on the spreadsheet column. Default value is 3.
 const punctuation = ": "; // this changes the punctuation between the title and the description. In most cases you'd want to use "," or "-" or ":"
@@ -16,10 +14,6 @@ var dataTable = [];
 var activeButtons = [];
 
 let hash = location.hash.substr(1);
-
-if (hash === "tips") {
-  goToTips();
-}
 
 // tableTop.js script
 function init() {
@@ -41,14 +35,6 @@ function init() {
     },
   });
 
-  Papa.parse(linkTips, {
-    download: true,
-    header: true,
-    complete: function (results) {
-      var data = results.data;
-      showTips(data);
-    },
-  });
 }
 
 function showLink(data) {
@@ -94,46 +80,6 @@ function showContrib(data) {
     a.target = "_blank";
     contribP.appendChild(a);
     contribP.innerHTML = contribP.innerHTML + " ";
-  });
-}
-
-function showTips(data) {
-  // Ajout des tips
-  let tipsContainer = document.getElementById("tipsContainer");
-
-  shuffle(data);
-
-  data.forEach((t) => {
-    let div = document.createElement("div");
-
-    div.classList.add("tips");
-
-    // Avatar de l'auteur
-    let avatar = document.createElement("img");
-    avatar.src = t.Avatar;
-    avatar.alt = "Avatar de " + t.Auteur;
-
-    div.appendChild(avatar);
-
-    // Conteneur de droite
-    let rightDiv = document.createElement("div");
-
-    div.appendChild(rightDiv);
-
-    // Tips
-    let div2 = document.createElement("div");
-    div2.innerHTML = mdConverter.makeHtml(t.Texte);
-
-    rightDiv.appendChild(div2);
-
-    // Nom
-    let a = document.createElement("a");
-    a.innerHTML = t.Auteur;
-    a.href = t.URL;
-
-    rightDiv.appendChild(a);
-
-    tipsContainer.appendChild(div);
   });
 }
 
@@ -272,44 +218,3 @@ function filterSelection() {
 }
 
 window.addEventListener("DOMContentLoaded", init);
-
-// PARTIE TIPS
-function goToTips() {
-  document.getElementById("mainPage").style.display = "none";
-  document.getElementById("tipsPage").style.display = "block";
-
-  document.getElementById("mainLink").classList.remove("selectedLink");
-  document.getElementById("tipsLink").classList.add("selectedLink");
-
-  window.location.hash = "tips";
-}
-
-function goToMain() {
-  document.getElementById("mainPage").style.display = "block";
-  document.getElementById("tipsPage").style.display = "none";
-
-  document.getElementById("mainLink").classList.add("selectedLink");
-  document.getElementById("tipsLink").classList.remove("selectedLink");
-
-  window.location.hash = "";
-}
-
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}

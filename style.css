@@ -1,8 +1,13 @@
 /* CSS files add styling rules to your content */
 
+:root {
+  --light-color: #FAD7A0;
+  --dark-color: #F5B041;
+}
+
 body {
   font-family: helvetica, arial, sans-serif;
-  background-color: #AED6F1;
+  background-color: var(--light-color);
   margin: 2em;
   padding: 2em;
   font-size: 14px;
@@ -99,7 +104,7 @@ p.itemPara {
 }
 
 .divContainer {
-  background-color: #85C1E9;
+  background-color: var(--dark-color);
   border-radius: 5px;
   margin-bottom: 10px;
   filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.2));
@@ -107,7 +112,7 @@ p.itemPara {
 }
 
 footer {
-  background-color: #85C1E9;
+  background-color: var(--dark-color);
   border-radius: 5px;
   margin-bottom: 10px;
   filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.2));
@@ -151,40 +156,4 @@ nav {
 
 .selectedLink {
   border-bottom: solid 2px black;
-}
-
-/* Tips */
-.tips {
-  display: flex;
-  flex-direction: row;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #85C1E9;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.2));
-  padding: 10px;
-  align-items: center;
-}
-
-.tips img {
-  height: 100px;
-  border-radius: 50px;
-}
-
-.tips > div {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  width: 100%;
-}
-
-.tips > div > div > p {
-  text-align: justify;
-}
-
-.tips > div > a {
-  display: block;
-  margin-left: auto;
 }
