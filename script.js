@@ -48,8 +48,6 @@ var activeButtons = [];
 
 // tableTop.js script
 function init() {
-  let categoryContainer = document.getElementById("categoryContainer")
-
   mainCategory.forEach(category => {
     Papa.parse(`${linkSpreedsheet}&gid=${GID[category]}&single=true`, {
       download: true,
@@ -200,6 +198,20 @@ function drawLinks() {
 
     container.appendChild(para);
   })
+}
+
+function changeSection(section) {
+  let links = document.getElementsByClassName("mainCategory")
+
+  for (const link of links) {
+    link.classList.remove("current");
+  }
+
+  currentCategorie = section
+  placeButton(section)
+  drawLinks();
+
+  document.getElementById("link-" + section).classList.add("current")
 }
 
 // function showLink(data, categorie) {
