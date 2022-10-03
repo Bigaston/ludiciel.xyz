@@ -162,6 +162,8 @@ function drawLinks() {
       activeButtons.forEach(act => {
         if (elementTags.includes(act)) {
           inside = true;
+        } else {
+          inside = false;
         }
       })
   
@@ -198,6 +200,29 @@ function drawLinks() {
 
     container.appendChild(para);
   })
+
+  let currentlyShowing = document.getElementById("currentlyShowing");
+  currentlyShowing.innerHTML =
+    "<strong>Montre actuellement: </strong> " +
+    data.length +
+    " outils avec <strong>tous</strong> les attributs suivants - ";
+
+  for (let u = 0; u < activeButtons.length; u++) {
+    currentlyShowing.innerHTML += "[<strong>" + activeButtons[u] + "</strong>]";
+    if (u + 1 == activeButtons.length) {
+      currentlyShowing.innerHTML += ".";
+    } else {
+      currentlyShowing.innerHTML += ", ";
+    }
+  }
+
+  if (activeButtons.length == 0) {
+    currentlyShowing.innerHTML +=
+      "Aucun. Cliquez sur un attribut pour commencer! ";
+  } else {
+    currentlyShowing.innerHTML +=
+      ' <a onclick=removeAllFilters() class="removeFilter">Retirer tous les filtres.</a>';
+  }
 }
 
 function changeSection(section) {
